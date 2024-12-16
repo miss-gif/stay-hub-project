@@ -4,11 +4,12 @@ import { Hotel } from '@/types/hotel';
 import {
   QuerySnapshot,
   collection,
-  getDoc,
   getDocs,
+  getDoc,
   limit,
   query,
   startAfter,
+  doc,
 } from 'firebase/firestore';
 
 // 전체 호텔 목록을 가져오는 함수
@@ -40,8 +41,10 @@ export const getHotels = async (pageParams?: QuerySnapshot<Hotel>) => {
   return { hotels, lastVisible };
 };
 
+// 단일 호텔 가져오는 함수
 export const getHotel = async (id: string) => {
-  const snapshot = await getDoc(collection(db, COLLECTIONS.HOTEL, id));
+  const docRef = doc(db, COLLECTIONS.HOTEL, id);
+  const snapshot = await getDoc(docRef);
 
   return {
     id,
