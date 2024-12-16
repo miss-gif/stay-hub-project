@@ -11,7 +11,7 @@ interface TabsComponentProps {
 }
 
 const TabsComponent: React.FC<TabsComponentProps> = ({ tabs }) => (
-  <Tabs defaultValue={tabs[0]?.value} className="w-[400px]">
+  <Tabs defaultValue={tabs[0]?.value} className="">
     <TabsList className="grid w-full grid-cols-2">
       {tabs.map(tab => (
         <TabsTrigger key={tab.value} value={tab.value}>
