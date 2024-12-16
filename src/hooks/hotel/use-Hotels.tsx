@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getHotels } from '@/apis/hotel';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
