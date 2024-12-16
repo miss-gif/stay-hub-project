@@ -1,11 +1,9 @@
 import useHotels from '@/hooks/hotel/use-Hotels';
-import Hotel from './Hotel';
+import HotelItem from './HotelItem';
 import InfinityScroll from 'react-infinite-scroll-component';
 
 const HotelList = () => {
   const { data: hotels, hasNextPage, loadMore } = useHotels();
-
-  console.log(hotels);
 
   return (
     <div>
@@ -23,7 +21,7 @@ const HotelList = () => {
       >
         <ul className="bg-neutral-200 space-y-2">
           {hotels.map(hotel => (
-            <Hotel key={hotel.id} hotel={hotel} />
+            <HotelItem key={hotel.id} hotel={hotel} />
           ))}
         </ul>
       </InfinityScroll>

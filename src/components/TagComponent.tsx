@@ -2,8 +2,6 @@ import { events } from '@/types/hotel';
 import { Badge } from './ui/badge';
 
 const TagComponent = ({ name, tagThemeStyle, promotionTime }: events) => {
-  console.log(tagThemeStyle);
-
   const { backgroundColor, fontColor } = tagThemeStyle;
 
   return (
