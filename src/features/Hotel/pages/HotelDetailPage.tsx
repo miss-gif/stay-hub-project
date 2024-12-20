@@ -3,6 +3,7 @@ import useHotel from '@/hooks/hotel/use-Hotel';
 import { useParams } from 'react-router-dom';
 import HotelContents from '../components/HotelContents';
 import HotelRooms from '../components/HotelRooms';
+import GoolgleMap from '../components/GoolgleMap';
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,7 +13,7 @@ const HotelDetailPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { name, image, comment, contents } = hotel;
+  const { name, image, comment, contents, location } = hotel;
 
   return (
     <div>
@@ -23,6 +24,7 @@ const HotelDetailPage = () => {
       <Carousel image={image} />
       {id && <HotelRooms hotelId={id} />}
       <HotelContents contents={contents} />
+      <GoolgleMap location={location} />
     </div>
   );
 };
