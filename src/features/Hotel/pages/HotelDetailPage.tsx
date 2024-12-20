@@ -2,6 +2,7 @@ import Carousel from '@/components/Carousel';
 import useHotel from '@/hooks/hotel/use-Hotel';
 import { useParams } from 'react-router-dom';
 import HotelContents from '../components/HotelContents';
+import HotelRooms from '../components/HotelRooms';
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,6 +21,7 @@ const HotelDetailPage = () => {
         <p>{comment}</p>
       </div>
       <Carousel image={image} />
+      {id && <HotelRooms hotelId={id} />}
       <HotelContents contents={contents} />
     </div>
   );
