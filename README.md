@@ -15,6 +15,11 @@
   : 공유하기
   : 문서편집 (마크다운)
 
+  ```
+  npm i react-markdown
+  npm install -D @tailwindcss/typography
+  ```
+
 - 찜목록
   : 드래그앤드롭
 

@@ -1,27 +1,26 @@
 import Carousel from '@/components/Carousel';
 import useHotel from '@/hooks/hotel/use-Hotel';
 import { useParams } from 'react-router-dom';
+import HotelContents from '../components/HotelContents';
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data: hotel, isLoading } = useHotel(id as string);
 
-  console.log(hotel);
-  console.log(isLoading);
-
   if (hotel == null || isLoading) {
     return <div>Loading...</div>;
   }
 
-  const { name, image } = hotel;
-
-  console.log(name);
-  console.log('image', image);
+  const { name, image, comment, contents } = hotel;
 
   return (
     <div>
-      {name}
+      <div className="p-4">
+        <h2 className="font-semibold text-2xl">{name}</h2>
+        <p>{comment}</p>
+      </div>
       <Carousel image={image} />
+      <HotelContents contents={contents} />
     </div>
   );
 };

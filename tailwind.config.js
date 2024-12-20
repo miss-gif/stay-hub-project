@@ -1,9 +1,30 @@
+/* eslint-disable no-undef */
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            'ul > li': {
+              paddingInlineStart: '0',
+            },
+            ul: {
+              paddingInlineStart: '1.85em',
+            },
+            img: {
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '0.375rem',
+            },
+          },
+        },
+      },
+
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -53,5 +74,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 };
