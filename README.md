@@ -1,4 +1,4 @@
-# stay-hub
+# stay-hub-project
 
 ## 구현기능
 
