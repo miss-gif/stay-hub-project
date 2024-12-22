@@ -10,6 +10,8 @@ import {
   query,
   startAfter,
   doc,
+  where,
+  documentId,
 } from 'firebase/firestore';
 
 // 전체 호텔 목록을 가져오는 함수
@@ -50,4 +52,22 @@ export const getHotel = async (id: string) => {
     id,
     ...snapshot.data(),
   } as Hotel;
+};
+
+// 추천 호텔 목록을 가져오는 함수
+export const getRecommendedHotels = async (hotelIds: string[]) => {
+  const recommendQuery = query(
+    collection(db, COLLECTIONS.HOTEL),
+    where(documentId(), 'in', hotelIds), // 호텔 아이디가 hotelIds에 포함되어 있는 경우
+  );
+
+  const recommendSnapshot = await getDocs(recommendQuery);
+
+  return recommendSnapshot.docs.map(
+    doc =>
+      ({
+        id: doc.id,
+        ...doc.data(),
+      }) as Hotel,
+  );
 };

@@ -9,6 +9,7 @@ export interface Hotel {
   name: string;
   starRating: number;
   events?: events;
+  recommendHotelList?: string[];
 }
 
 export interface Location {

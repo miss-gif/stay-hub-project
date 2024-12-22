@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import HotelContents from '../components/HotelContents';
 import HotelRooms from '../components/HotelRooms';
 import GoolgleMap from '../components/GoolgleMap';
+import RecommendHotels from '../components/RecommendHotels';
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +14,8 @@ const HotelDetailPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { name, image, comment, contents, location } = hotel;
+  const { name, image, comment, contents, location, recommendHotelList } =
+    hotel;
 
   return (
     <div>
@@ -25,6 +27,7 @@ const HotelDetailPage = () => {
       {id && <HotelRooms hotelId={id} />}
       <HotelContents contents={contents} />
       <GoolgleMap location={location} />
+      <RecommendHotels recommendHotelList={recommendHotelList ?? []} />
     </div>
   );
 };
