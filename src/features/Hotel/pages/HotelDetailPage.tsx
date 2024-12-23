@@ -5,6 +5,7 @@ import HotelContents from '../components/HotelContents';
 import HotelRooms from '../components/HotelRooms';
 import GoolgleMap from '../components/GoolgleMap';
 import RecommendHotels from '../components/RecommendHotels';
+import ActionButton from '../components/ActionButton';
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,6 +25,7 @@ const HotelDetailPage = () => {
         <p>{comment}</p>
       </div>
       <Carousel image={image} />
+      <ActionButton hotel={hotel} />
       {id && <HotelRooms hotelId={id} />}
       <HotelContents contents={contents} />
       <GoolgleMap location={location} />
