@@ -1,4 +1,3 @@
-import TagComponent from '@/components/TagComponent';
 import {
   Card,
   CardContent,
@@ -8,10 +7,10 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Hotel as HotelType } from '@/types/hotel';
-import { formatTime } from '@/utils/formatTime';
 import { differenceInMilliseconds, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Tag from './Tag';
 
 function HotelItem({ hotel }: { hotel: HotelType }) {
   const [remainedTime, setRemainedTime] = useState(0);
@@ -42,26 +41,6 @@ function HotelItem({ hotel }: { hotel: HotelType }) {
     };
   }, [hotel.events]);
 
-  const tag = () => {
-    // 이벤트가 없는 경우
-    if (hotel.events == null) {
-      return null;
-    }
-
-    const { name, tagThemeStyle } = hotel.events;
-
-    const promotionTime =
-      remainedTime > 0 ? ` - ${formatTime(remainedTime)} 남음` : ''; // 남은 시간을 포함
-
-    return (
-      <TagComponent
-        name={name}
-        tagThemeStyle={tagThemeStyle}
-        promotionTime={promotionTime} // 남은 시간을 포함
-      />
-    );
-  };
-
   return (
     <li>
       <Link to={`/hotel/${hotel.id}`}>
@@ -75,7 +54,7 @@ function HotelItem({ hotel }: { hotel: HotelType }) {
           </CardHeader>
           <CardContent className="flex justify-between">
             <div className="space-y-2">
-              {tag()}
+              <Tag hotel={hotel} remainedTime={remainedTime} />
               <h3 className="text-xl font-bold">{hotel.name}</h3>
               <p className="text-sm font-semibold">{hotel.comment}</p>
               <p className="text-xs text-neutral-400 font-semibold">

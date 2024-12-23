@@ -5,7 +5,7 @@ const TagComponent = ({ name, tagThemeStyle, promotionTime }: events) => {
   const { backgroundColor, fontColor } = tagThemeStyle;
 
   return (
-    <Badge className={`text-xs bg-[${backgroundColor}] text-[${fontColor}]`}>
+    <Badge className="text-xs" style={{ backgroundColor, color: fontColor }}>
       {name} {promotionTime}
     </Badge>
   );
