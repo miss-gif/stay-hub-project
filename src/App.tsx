@@ -4,17 +4,22 @@ import HotelPage from './features/Hotel/pages/HotelPage';
 import useLoadKakao from './hooks/use-LoadKakao';
 import SigninPage from './features/Hotel/pages/SigninPage';
 import MyPage from './features/Hotel/pages/MyPage';
+import AuthGuard from './components/auth/AuthGuard';
+import Navbar from './components/Navbar';
 
 const App = () => {
   useLoadKakao();
 
   return (
-    <Routes>
-      <Route path="/" element={<HotelPage />} />
-      <Route path="/hotel/:id" element={<HotelDetailPage />} />
-      <Route path="/my" element={<MyPage />} />
-      <Route path="/signin" element={<SigninPage />} />
-    </Routes>
+    <AuthGuard>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HotelPage />} />
+        <Route path="/hotel/:id" element={<HotelDetailPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/signin" element={<SigninPage />} />
+      </Routes>
+    </AuthGuard>
   );
 };
 
