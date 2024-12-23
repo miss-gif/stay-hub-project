@@ -20,7 +20,7 @@ const useLoadKakao = () => {
         window.Kakao.init(import.meta.env.VITE_KAKAO_API_KEY as string);
       }
     };
-  });
+  }, []);
 };
 
 export default useLoadKakao;
