@@ -18,7 +18,7 @@ const GoolgleMap = ({ location }: { location: Hotel['location'] }) => {
 
   return (
     <div className="px-4 pb-4">
-      <h2 className="text-xl font-semibold">위치 정보</h2>
+      <h3 className="text-xl font-semibold">위치 정보</h3>
       <GoogleMap
         mapContainerStyle={{
           width: '100%',
