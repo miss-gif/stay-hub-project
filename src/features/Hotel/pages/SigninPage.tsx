@@ -7,6 +7,7 @@ const SigninPage = () => {
   return (
     <div>
       <Button onClick={signin}>구글 로그인</Button>
+      <Button onClick={signout}>구글 로그아웃</Button>
     </div>
   );
 };

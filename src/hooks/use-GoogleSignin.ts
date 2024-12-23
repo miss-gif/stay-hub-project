@@ -55,10 +55,11 @@ const useGoogleSignin = () => {
   const signout = useCallback(async () => {
     try {
       await signOut(auth);
+      navigate('/');
     } catch (error) {
       console.error('로그아웃 에러:', error);
     }
-  }, []);
+  }, [navigate]);
 
   return { signin, signout };
 };
