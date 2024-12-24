@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import useLike from '@/hooks/use-Like';
 import useShare from '@/hooks/use-Share';
 import { Hotel } from '@/types/hotel';
 import { CopyIcon, HeartIcon } from 'lucide-react';
@@ -10,7 +11,14 @@ interface ActionButtonProps {
 
 const ActionButton: React.FC<ActionButtonProps> = ({ hotel }) => {
   const share = useShare();
+  const { data: likes, mutate: like } = useLike();
   const { name, comment, mainImage } = hotel;
+
+  const isLike = Boolean(
+    likes?.find(like => {
+      return like.hotelId === hotel.id;
+    }),
+  );
 
   const handleShare = () => {
     share({
@@ -37,7 +45,18 @@ const ActionButton: React.FC<ActionButtonProps> = ({ hotel }) => {
         onClick={handleFavorite}
       >
         <div className="flex items-center flex-col">
-          <HeartIcon />
+          <HeartIcon
+            className={`text-red-500 ${isLike ? 'fill-red-500' : ''}`}
+            onClick={() => {
+              like({
+                hotel: {
+                  name: hotel.name,
+                  mainImage: hotel.mainImage,
+                  id: hotel.id,
+                },
+              });
+            }}
+          />
           찜하기
         </div>
       </Button>

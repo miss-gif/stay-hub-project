@@ -1,9 +1,17 @@
 import useHotels from '@/hooks/hotel/use-Hotels';
 import HotelItem from './HotelItem';
 import InfinityScroll from 'react-infinite-scroll-component';
+import useLike from '@/hooks/use-Like';
+import useUserStore from '@/stores/user';
 
 const HotelList = () => {
   const { data: hotels, hasNextPage, loadMore } = useHotels();
+  const { data: likes, mutate: like } = useLike();
+
+  const { user } = useUserStore();
+
+  console.log('User:', user);
+  console.log('likes', likes);
 
   return (
     <div>
@@ -21,7 +29,16 @@ const HotelList = () => {
       >
         <ul className="bg-neutral-200 space-y-2">
           {hotels.map(hotel => (
-            <HotelItem key={hotel.id} hotel={hotel} />
+            <HotelItem
+              key={hotel.id}
+              hotel={hotel}
+              isLike={Boolean(
+                likes?.find(like => {
+                  return like.hotelId === hotel.id;
+                }),
+              )}
+              onLike={like}
+            />
           ))}
         </ul>
       </InfinityScroll>

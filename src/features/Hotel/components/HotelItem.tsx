@@ -11,8 +11,21 @@ import { differenceInMilliseconds, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Tag from './Tag';
+import { HeartIcon } from 'lucide-react';
 
-function HotelItem({ hotel }: { hotel: HotelType }) {
+function HotelItem({
+  hotel,
+  isLike,
+  onLike,
+}: {
+  hotel: HotelType;
+  isLike: boolean;
+  onLike: ({
+    hotel,
+  }: {
+    hotel: Pick<HotelType, 'name' | 'id' | 'mainImage'>;
+  }) => void;
+}) {
   const [remainedTime, setRemainedTime] = useState(0);
 
   useEffect(() => {
@@ -41,6 +54,18 @@ function HotelItem({ hotel }: { hotel: HotelType }) {
     };
   }, [hotel.events]);
 
+  // 좋아요 버튼 클릭 시
+  const handleLike = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+    e.preventDefault();
+    onLike({
+      hotel: {
+        name: hotel.name,
+        mainImage: hotel.mainImage,
+        id: hotel.id,
+      },
+    });
+  };
+
   return (
     <li>
       <Link to={`/hotel/${hotel.id}`}>
@@ -62,11 +87,17 @@ function HotelItem({ hotel }: { hotel: HotelType }) {
               </p>
             </div>
             <div className="flex flex-col items-end space-y-2">
-              <img
-                src={hotel.mainImage}
-                alt={hotel.name}
-                className="w-32 h-32 object-cover rounded-lg"
-              />
+              <div className="relative">
+                <HeartIcon
+                  className={`absolute top-2 right-2 text-red-500 ${isLike ? 'fill-red-500' : ''}`}
+                  onClick={handleLike}
+                />
+                <img
+                  src={hotel.mainImage}
+                  alt={hotel.name}
+                  className="w-32 h-32 object-cover rounded-lg"
+                />
+              </div>
               <p className="font-semibold text-base px-2">
                 {hotel.price.toLocaleString()}원
               </p>
