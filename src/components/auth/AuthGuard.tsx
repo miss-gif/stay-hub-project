@@ -14,8 +14,6 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      console.log('user', user);
-
       if (user) {
         setUser({
           uid: user.uid || '',

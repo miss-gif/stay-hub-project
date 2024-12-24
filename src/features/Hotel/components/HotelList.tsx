@@ -1,17 +1,11 @@
 import useHotels from '@/hooks/hotel/use-Hotels';
-import HotelItem from './HotelItem';
-import InfinityScroll from 'react-infinite-scroll-component';
 import useLike from '@/hooks/use-Like';
-import useUserStore from '@/stores/user';
+import InfinityScroll from 'react-infinite-scroll-component';
+import HotelItem from './HotelItem';
 
 const HotelList = () => {
   const { data: hotels, hasNextPage, loadMore } = useHotels();
   const { data: likes, mutate: like } = useLike();
-
-  const { user } = useUserStore();
-
-  console.log('User:', user);
-  console.log('likes', likes);
 
   return (
     <div>

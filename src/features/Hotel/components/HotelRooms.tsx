@@ -4,8 +4,6 @@ import useRooms from '@/hooks/hotel/use-Rooms';
 const HotelRooms = ({ hotelId }: { hotelId: string }) => {
   const { data: rooms } = useRooms({ hotelId });
 
-  console.log('rooms', rooms);
-
   return (
     <div className="my-10">
       <div className="px-4 mb-5 flex justify-between items-center">

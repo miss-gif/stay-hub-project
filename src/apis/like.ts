@@ -17,7 +17,6 @@ import {
 
 // 좋아요 목록 가져오기
 export const getLikes = async ({ userId }: { userId: string }) => {
-  console.log('Query userId:', userId);
   const snapshot = await getDocs(
     query(
       collection(db, COLLECTIONS.LIKES),

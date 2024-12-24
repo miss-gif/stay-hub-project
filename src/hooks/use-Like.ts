@@ -1,12 +1,13 @@
 import { getLikes, toggleLike } from '@/apis/like';
 import useUserStore from '@/stores/user';
 import { Hotel } from '@/types/hotel';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 const useLike = () => {
   const { user } = useUserStore();
   const navigate = useNavigate();
+  const client = useQueryClient();
 
   // 좋아요 목록 가져오기
   const { data } = useQuery({
@@ -26,6 +27,10 @@ const useLike = () => {
         throw new Error('로그인 필요');
       }
       return toggleLike({ hotel, userId: user.uid });
+    },
+
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['likes'] });
     },
 
     onError: (e: Error) => {
