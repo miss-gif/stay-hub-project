@@ -103,3 +103,16 @@ export const toggleLike = async ({
     return setDoc(doc(collection(db, COLLECTIONS.LIKES)), newLike);
   }
 };
+
+// 좋아요 순서 변경
+export const updateLikeOrder = async ({ likes }: { likes: Like[] }) => {
+  const batch = writeBatch(db);
+
+  likes.forEach(like => {
+    batch.update(doc(db, COLLECTIONS.LIKES, like.id), {
+      order: like.order,
+    });
+  });
+
+  return batch.commit();
+};
