@@ -22,12 +22,12 @@ const useEditLike = () => {
       const newItems = [...prevUpdatedLikes];
       const [removed] = newItems.splice(from, 1);
 
-      if (removed) {
+      if (removed != null) {
         newItems.splice(to, 0, removed);
       }
 
-      newItems.forEach((item, index) => {
-        item.order = index + 1;
+      newItems.forEach((like, index) => {
+        like.order = index + 1;
       });
 
       return newItems;
@@ -37,10 +37,12 @@ const useEditLike = () => {
   const save = async () => {
     try {
       await updateLikeOrder({ likes: updatedLikes });
-      client.setQueryData(['likes'], updatedLikes);
+      client.setQueryData(['likes'], updatedLikes); // 캐시 업데이트
+      await client.invalidateQueries({ queryKey: ['likes'] }); // 캐시 데이터를 다시 가져오도록 트리거
       setIsEdit(false);
     } catch (error) {
       alert('순서 저장에 실패했습니다.');
+      setIsEdit(false);
     }
   };
 
