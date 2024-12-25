@@ -3,4 +3,5 @@ export const COLLECTIONS = {
   ROOMS: 'ROOMS',
   USERS: 'USERS',
   LIKES: 'LIKES',
+  REVIEW: 'REVIEW',
 };

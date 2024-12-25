@@ -6,6 +6,7 @@ import HotelRooms from '../components/HotelRooms';
 import GoolgleMap from '../components/GoolgleMap';
 import RecommendHotels from '../components/RecommendHotels';
 import ActionButton from '../components/ActionButton';
+import Review from '../components/Review';
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -30,6 +31,7 @@ const HotelDetailPage = () => {
       <HotelContents contents={contents} />
       <GoolgleMap location={location} />
       <RecommendHotels recommendHotelList={recommendHotelList ?? []} />
+      {id && <Review hotelId={id} />}
     </div>
   );
 };
