@@ -4,6 +4,7 @@ import { Review } from '@/types/review';
 import { User } from '@/types/user';
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -64,6 +65,7 @@ export const getReviews = async ({ hotelId }: { hotelId: string }) => {
   return results;
 };
 
+// 리뷰 작성
 export const writeReview = (review: Omit<Review, 'id'>) => {
   // 호텔 정보 참조
   const hotelRef = doc(db, COLLECTIONS.HOTEL, review.hotelId);
@@ -72,4 +74,12 @@ export const writeReview = (review: Omit<Review, 'id'>) => {
   const reviewRef = doc(collection(hotelRef, COLLECTIONS.REVIEW));
 
   return setDoc(reviewRef, review);
+};
+
+// 리뷰 삭제
+export const removeReview = (hotelId: string, reviewId: string) => {
+  const hotelRef = doc(db, COLLECTIONS.HOTEL, hotelId);
+  const reviewRef = doc(collection(hotelRef, COLLECTIONS.REVIEW), reviewId);
+
+  return deleteDoc(reviewRef);
 };

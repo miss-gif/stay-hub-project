@@ -1,4 +1,4 @@
-import { getReviews, writeReview } from '@/apis/review';
+import { getReviews, writeReview, removeReview } from '@/apis/review';
 import useUserStore from '@/stores/user';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -30,7 +30,23 @@ const useReviews = ({ hotelId }: { hotelId: string }) => {
     },
   });
 
-  return { data, isLoading, write };
+  const { mutate: remove } = useMutation({
+    mutationFn: ({
+      hotelId,
+      reviewId,
+    }: {
+      hotelId: string;
+      reviewId: string;
+    }) => {
+      return removeReview(hotelId, reviewId);
+    },
+
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['reviews', hotelId] });
+    },
+  });
+
+  return { data, isLoading, write, remove };
 };
 
 export default useReviews;

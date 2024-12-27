@@ -11,7 +11,7 @@ interface ReviewProps {
 }
 
 export default function Review({ hotelId }: ReviewProps) {
-  const { data: reviews, isLoading, write } = useReviews({ hotelId });
+  const { data: reviews, isLoading, write, remove } = useReviews({ hotelId });
   const { user } = useUserStore();
   const [reviewText, setReviewText] = useState('');
 
@@ -21,10 +21,27 @@ export default function Review({ hotelId }: ReviewProps) {
     [],
   );
 
+  // 리뷰 삭제하기
+  const handleRemove = useCallback(
+    (reviewId: string) => {
+      try {
+        remove({ hotelId, reviewId });
+      } catch (error) {
+        console.error('리뷰 삭제 실패:', error);
+      }
+    },
+    [remove, hotelId],
+  );
+
+  // 리뷰 작성하기
   const submitReview = useCallback(async () => {
     if (!reviewText.trim()) return;
-    const success = await write(reviewText.trim());
-    if (success) setReviewText('');
+    try {
+      const success = await write(reviewText.trim());
+      if (success) setReviewText('');
+    } catch (error) {
+      console.error('리뷰 작성 실패:', error);
+    }
   }, [write, reviewText]);
 
   if (isLoading) return null;
@@ -60,7 +77,9 @@ export default function Review({ hotelId }: ReviewProps) {
                   </p>
                 </div>
               </div>
-              {user?.uid === review.user?.uid && <Button>수정</Button>}
+              {user?.uid === review.user?.uid && (
+                <Button onClick={() => handleRemove(review.id)}>삭제</Button>
+              )}
             </li>
           ))}
         </ul>
