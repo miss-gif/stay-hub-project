@@ -25,6 +25,7 @@
     "date-fns": "^4.1.0",
     "firebase": "^11.1.0",
     "lucide-react": "^0.468.0",
+    "qs": "^6.13.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-copy-to-clipboard": "^5.1.0",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.10.2",
+    "@types/qs": "^6.9.17",
     "@types/react": "^18.0.28",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-copy-to-clipboard": "^5.0.7",

@@ -1,8 +1,15 @@
 import { Button } from '@/components/ui/button';
 import useRooms from '@/hooks/hotel/use-Rooms';
+import useUserStore from '@/stores/user';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
 const HotelRooms = ({ hotelId }: { hotelId: string }) => {
   const { data: rooms } = useRooms({ hotelId });
+
+  const { user } = useUserStore();
+
+  const navigate = useNavigate();
 
   return (
     <div className="my-10">
@@ -15,6 +22,16 @@ const HotelRooms = ({ hotelId }: { hotelId: string }) => {
         {rooms?.map(room => {
           const lastOne = room.avaliableCount === 1;
           const soldOut = room.avaliableCount === 0;
+
+          const parmas = qs.stringify(
+            {
+              roomId: room.id,
+              hotelId,
+            },
+            { addQueryPrefix: true },
+          );
+
+          console.log(parmas);
 
           return (
             <li
@@ -42,7 +59,18 @@ const HotelRooms = ({ hotelId }: { hotelId: string }) => {
                   </p>
                 </div>
               </div>
-              <Button disabled={soldOut} className="bg-blue-500 font-bold">
+              <Button
+                disabled={soldOut}
+                className="bg-blue-500 font-bold"
+                onClick={() => {
+                  if (!user) {
+                    alert('로그인이 필요합니다.');
+                    navigate('/signin');
+                    return;
+                  }
+                  navigate(`/schedule${parmas}`);
+                }}
+              >
                 {soldOut ? '매진' : '선택'}
               </Button>
             </li>

@@ -9,6 +9,8 @@ import useLoadKakao from './hooks/use-LoadKakao';
 import MyPage from './pages/MyPage';
 import LikePage from './pages/settings/LikePage';
 import SettingsPage from './pages/settings/SettingsPage';
+import Schedule from './features/Hotel/pages/Schedule';
+import Reservation from './features/Hotel/pages/Reservation';
 
 const App = () => {
   useLoadKakao();
@@ -40,6 +42,22 @@ const App = () => {
           element={
             <PrivateRoute>
               <MyPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/schedule"
+          element={
+            <PrivateRoute>
+              <Schedule />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reservation"
+          element={
+            <PrivateRoute>
+              <Reservation />
             </PrivateRoute>
           }
         />
