@@ -1,6 +1,7 @@
 import { COLLECTIONS } from '@/constants';
 import { db } from '@/remote/firebaseConfig';
 import { Hotel } from '@/types/hotel';
+import { Room } from '@/types/rooms';
 import {
   QuerySnapshot,
   collection,
@@ -70,4 +71,17 @@ export const getRecommendedHotels = async (hotelIds: string[]) => {
         ...doc.data(),
       }) as Hotel,
   );
+};
+
+// 호텔과 방 정보를 가져오는 함수
+export const getHotelWithRoom = async (hotelId: string, roomId: string) => {
+  const hotelRef = doc(db, COLLECTIONS.HOTEL, hotelId);
+  const hotelSnapshot = await getDoc(hotelRef);
+  const roomRef = doc(hotelSnapshot.ref, COLLECTIONS.ROOMS, roomId);
+  const roomSnapshot = await getDoc(roomRef);
+
+  return {
+    hotel: hotelSnapshot.data() as Hotel,
+    room: roomSnapshot.data() as Room,
+  };
 };
