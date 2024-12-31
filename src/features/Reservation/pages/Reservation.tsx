@@ -2,6 +2,7 @@ import useReservation from '@/hooks/reservation/use-Reservation';
 import { parse } from 'qs';
 import { useEffect } from 'react';
 import Summary from '../components/Summary';
+import Form from '../components/Form';
 
 const Reservation = () => {
   // URL 쿼리 파라미터를 파싱하여 예약 정보를 가져옵니다.
@@ -39,6 +40,10 @@ const Reservation = () => {
 
   const { hotel, room } = data;
 
+  const handleSubmit = () => {
+    console.log('예약 정보를 서버로 전송합니다.');
+  };
+
   return (
     <div>
       <Summary
@@ -48,6 +53,7 @@ const Reservation = () => {
         endDate={endDate}
         nights={parseInt(nights)}
       />
+      <Form onSubmit={handleSubmit} forms={hotel.forms} />
     </div>
   );
 };

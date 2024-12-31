@@ -10,7 +10,7 @@ import MyPage from './pages/MyPage';
 import LikePage from './pages/settings/LikePage';
 import SettingsPage from './pages/settings/SettingsPage';
 import Schedule from './features/Hotel/pages/Schedule';
-import Reservation from './features/Hotel/pages/Reservation';
+import Reservation from './features/Reservation/pages/Reservation';
 
 const App = () => {
   useLoadKakao();

@@ -10,6 +10,7 @@ export interface Hotel {
   starRating: number;
   events?: events;
   recommendHotelList?: string[];
+  forms: ReservationForm[];
 }
 
 export interface Location {
@@ -28,3 +29,21 @@ export interface events {
   tagThemeStyle: { backgroundColor: string; fontColor: string };
   promotionTime?: string;
 }
+
+interface BaseForm {
+  id: string;
+  label: string;
+  required: string;
+  help?: boolean;
+}
+
+interface TextFieldForm extends BaseForm {
+  type: 'TEXT_FIELD';
+}
+
+interface SelectFieldForm extends BaseForm {
+  type: 'SELECT';
+  options: Array<{ label: string; value: string }>;
+}
+
+export type ReservationForm = TextFieldForm | SelectFieldForm;
