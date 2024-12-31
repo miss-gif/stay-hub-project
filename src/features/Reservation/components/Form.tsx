@@ -1,3 +1,5 @@
+import { InputWithLabel } from '@/components/InputWithLabel';
+import { SelectWithLabel } from '@/components/SelectWithLabel';
 import { Hotel, ReservationForm } from '@/types/hotel';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,6 +19,7 @@ const Form = ({ onSubmit, forms }: FormProps) => {
           <div key={form.id}>
             <label>{form.label}</label>
             <input type="text" {...register(form.id)} />
+            <InputWithLabel />
           </div>
         );
       } else if (form.type === 'SELECT') {
@@ -30,6 +33,7 @@ const Form = ({ onSubmit, forms }: FormProps) => {
                 </option>
               ))}
             </select>
+            <SelectWithLabel />
           </div>
         );
       } else {
