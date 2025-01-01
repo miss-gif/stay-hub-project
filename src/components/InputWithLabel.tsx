@@ -1,11 +1,25 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export function InputWithLabel() {
+interface InputWithLabelProps {
+  label: string;
+  type: string;
+  id: string;
+  placeholder?: string;
+}
+
+export function InputWithLabel({
+  label,
+  type,
+  id,
+  placeholder,
+}: InputWithLabelProps) {
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="email">Email</Label>
-      <Input type="email" id="email" placeholder="Email" />
+    <div className="grid w-full gap-1">
+      <Label htmlFor={id} className="text-sm">
+        {label}
+      </Label>
+      <Input type={type} id={id} placeholder={placeholder} />
     </div>
   );
 }

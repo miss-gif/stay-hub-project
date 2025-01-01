@@ -7,23 +7,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
 
-export function SelectWithLabel() {
+interface SelectWithLabelProps {
+  id: string;
+  label: string;
+  options: { value: string; label: string }[];
+}
+
+export function SelectWithLabel({ id, label, options }: SelectWithLabelProps) {
+  console.log(options);
+
   return (
-    <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div key={id}>
+      <Label htmlFor={id} className="text-sm">
+        {label}
+      </Label>
+      <Select>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="상관없음" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>옵션 선택</SelectLabel>
+            {options
+              .filter(option => option.value !== '')
+              .map(option => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

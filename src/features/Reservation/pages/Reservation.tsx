@@ -40,6 +40,8 @@ const Reservation = () => {
 
   const { hotel, room } = data;
 
+  const buttonLabel = `${Number(room.price * Number(nights)).toLocaleString()} 원 결제하기`;
+
   const handleSubmit = () => {
     console.log('예약 정보를 서버로 전송합니다.');
   };
@@ -53,7 +55,11 @@ const Reservation = () => {
         endDate={endDate}
         nights={parseInt(nights)}
       />
-      <Form onSubmit={handleSubmit} forms={hotel.forms} />
+      <Form
+        onSubmit={handleSubmit}
+        forms={hotel.forms}
+        buttonLabel={buttonLabel}
+      />
     </div>
   );
 };
