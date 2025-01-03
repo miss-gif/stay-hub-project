@@ -34,7 +34,13 @@ const ActionButton: React.FC<ActionButtonProps> = ({ hotel }) => {
   };
 
   const handleFavorite = () => {
-    alert('찜하기 버튼이 클릭되었습니다.');
+    like({
+      hotel: {
+        name: hotel.name,
+        mainImage: hotel.mainImage,
+        id: hotel.id,
+      },
+    });
   };
 
   return (
