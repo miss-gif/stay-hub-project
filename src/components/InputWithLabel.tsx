@@ -8,12 +8,12 @@ interface InputWithLabelProps {
   placeholder?: string;
 }
 
-export function InputWithLabel({
+export const InputWithLabel: React.FC<InputWithLabelProps> = ({
   label,
   type,
   id,
   placeholder,
-}: InputWithLabelProps) {
+}) => {
   return (
     <div className="grid w-full gap-1">
       <Label htmlFor={id} className="text-sm">
@@ -22,4 +22,4 @@ export function InputWithLabel({
       <Input type={type} id={id} placeholder={placeholder} />
     </div>
   );
-}
+};

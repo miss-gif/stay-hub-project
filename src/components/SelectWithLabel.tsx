@@ -15,9 +15,11 @@ interface SelectWithLabelProps {
   options: { value: string; label: string }[];
 }
 
-export function SelectWithLabel({ id, label, options }: SelectWithLabelProps) {
-  console.log(options);
-
+export const SelectWithLabel: React.FC<SelectWithLabelProps> = ({
+  id,
+  label,
+  options,
+}) => {
   return (
     <div key={id}>
       <Label htmlFor={id} className="text-sm">
@@ -42,4 +44,4 @@ export function SelectWithLabel({ id, label, options }: SelectWithLabelProps) {
       </Select>
     </div>
   );
-}
+};

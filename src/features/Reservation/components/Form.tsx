@@ -12,11 +12,12 @@ interface FormProps {
   forms: Hotel['forms'];
   buttonLabel: string;
 }
-
 const schema = z.object({
-  name: z.string().min(1, '숫자 입력'),
-  email: z.string().email('이메일 입력'),
-  phone: z.string().min(10, '전화번호 입력'),
+  name: z.string().min(1, { message: '이름을 입력해주세요.' }),
+  email: z.string().email({ message: '올바른 이메일 주소를 입력해주세요.' }),
+  phone: z
+    .string()
+    .min(10, { message: '전화번호는 최소 10자리 이상이어야 합니다.' }),
 });
 
 const Form = ({ onSubmit, forms, buttonLabel }: FormProps) => {
@@ -40,7 +41,9 @@ const Form = ({ onSubmit, forms, buttonLabel }: FormProps) => {
               id={form.id}
               {...register(form.id)}
             />
-            {errors[form.id] && <p>{String(errors[form.id]?.message)}</p>}
+            {errors[form.id] && (
+              <p className="text-red-500">{String(errors[form.id]?.message)}</p>
+            )}
           </div>
         );
       } else if (form.type === 'SELECT') {
@@ -52,7 +55,9 @@ const Form = ({ onSubmit, forms, buttonLabel }: FormProps) => {
               options={form.options}
               {...register(form.id)}
             />
-            {errors[form.id] && <p>{String(errors[form.id]?.message)}</p>}
+            {errors[form.id] && (
+              <p className="text-red-500">{String(errors[form.id]?.message)}</p>
+            )}
           </div>
         );
       } else {
