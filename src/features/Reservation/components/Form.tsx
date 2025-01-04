@@ -30,6 +30,8 @@ const Form = ({ onSubmit, forms, buttonLabel }: FormProps) => {
     resolver: zodResolver(schema),
   });
 
+  console.log('forms', forms);
+
   const renderComponent = useCallback(
     (form: ReservationForm) => {
       if (form.type === 'TEXT_FIELD') {
