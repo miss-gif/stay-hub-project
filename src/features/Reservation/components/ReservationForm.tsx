@@ -33,7 +33,7 @@ const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
       <p className="font-bold">예약정보</p>
       <form onSubmit={handleSubmit(SubmitData)} className="space-y-2">
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700">
+          <label htmlFor="name" className="block text-gray-700 text-sm">
             예약자명
           </label>
           <input
@@ -46,7 +46,7 @@ const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="phone" className="block text-gray-700">
+          <label htmlFor="phone" className="block text-gray-700 text-sm">
             전화번호
           </label>
           <input
@@ -59,7 +59,7 @@ const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700">
+          <label htmlFor="email" className="block text-gray-700 text-sm">
             이메일
           </label>
           <input
@@ -72,7 +72,10 @@ const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="smokingPreference" className="block text-gray-700">
+          <label
+            htmlFor="smokingPreference"
+            className="block text-gray-700 text-sm"
+          >
             흡연 여부
           </label>
           <select
@@ -91,7 +94,7 @@ const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="request" className="block text-gray-700">
+          <label htmlFor="request" className="block text-gray-700 text-sm">
             요청사항
           </label>
           <input

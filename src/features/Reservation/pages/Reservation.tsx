@@ -40,7 +40,7 @@ const Reservation = () => {
 
   const { hotel, room } = data;
 
-  const buttonLabel = `${Number(room.price * Number(nights)).toLocaleString()} 원 결제하기`;
+  const buttonLabel = `${nights}박 ${Number(room.price * Number(nights)).toLocaleString()}원 결제하기`;
 
   return (
     <div>
