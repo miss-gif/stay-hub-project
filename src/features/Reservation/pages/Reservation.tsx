@@ -3,6 +3,7 @@ import { parse } from 'qs';
 import { useEffect } from 'react';
 import ReservationForm from '../components/ReservationForm';
 import Summary from '../components/Summary';
+import { ReservationFormData } from '@/types/form';
 
 const Reservation = () => {
   // URL 쿼리 파라미터를 파싱하여 예약 정보를 가져옵니다.
@@ -40,6 +41,10 @@ const Reservation = () => {
 
   const { hotel, room } = data;
 
+  const SubmitData = (data: ReservationFormData) => {
+    console.log(data);
+  };
+
   const buttonLabel = `${nights}박 ${Number(room.price * Number(nights)).toLocaleString()}원 결제하기`;
 
   return (
@@ -51,7 +56,7 @@ const Reservation = () => {
         endDate={endDate}
         nights={parseInt(nights)}
       />
-      <ReservationForm buttonLabel={buttonLabel} />
+      <ReservationForm buttonLabel={buttonLabel} SubmitData={SubmitData} />
     </div>
   );
 };

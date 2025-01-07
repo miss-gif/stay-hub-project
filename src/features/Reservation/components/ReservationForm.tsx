@@ -2,20 +2,14 @@ import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { reservationSchema } from '../../../schema/validationSchema';
-
-type ReservationFormData = {
-  name: string;
-  phone: string;
-  email: string;
-  smokingPreference: '상관없음' | '흡연' | '비흡연';
-  request: string;
-};
+import { ReservationFormData } from '@/types/form';
 
 interface ReservationFormProps {
   buttonLabel: string;
+  SubmitData: (data: ReservationFormData) => void;
 }
 
-const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
+const ReservationForm = ({ buttonLabel, SubmitData }: ReservationFormProps) => {
   const {
     register,
     handleSubmit,
@@ -23,10 +17,6 @@ const ReservationForm = ({ buttonLabel }: ReservationFormProps) => {
   } = useForm<ReservationFormData>({
     resolver: zodResolver(reservationSchema),
   });
-
-  const SubmitData = (data: ReservationFormData) => {
-    console.log(data);
-  };
 
   return (
     <div className="px-4 py-6 space-y-2 pb-20">

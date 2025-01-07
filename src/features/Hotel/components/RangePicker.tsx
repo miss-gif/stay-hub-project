@@ -1,4 +1,4 @@
-import { differenceInDays, format, parseISO } from 'date-fns';
+import { addDays, differenceInDays, format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { DateRange, DayPicker } from 'react-day-picker';
 
@@ -46,6 +46,7 @@ const RangePicker = ({ startDate, endDate, onChange }: RangePickerProps) => {
         onSelect={handleDayClick}
         selected={selected}
         classNames={customClassNames}
+        disabled={{ before: addDays(today, 1) }}
       />
     </div>
   );
@@ -56,5 +57,6 @@ export default RangePicker;
 const customClassNames = {
   day: 'p-4 text-center',
   selected: 'text-white bg-red-500',
-  today: 'font-semibold',
+  today: 'font-semibold bg-gray-200 text-neutral-700',
+  disabled: 'text-gray-300',
 };
