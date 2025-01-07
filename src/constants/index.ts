@@ -4,4 +4,5 @@ export const COLLECTIONS = {
   USERS: 'USERS',
   LIKES: 'LIKES',
   REVIEW: 'REVIEW',
+  RESERVATION: 'RESERVATION',
 };

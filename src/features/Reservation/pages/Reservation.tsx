@@ -4,8 +4,12 @@ import { useEffect } from 'react';
 import ReservationForm from '../components/ReservationForm';
 import Summary from '../components/Summary';
 import { ReservationFormData } from '@/types/form';
+import useUserStore from '@/stores/user';
 
 const Reservation = () => {
+  const { user } = useUserStore();
+  console.log('user', user);
+
   // URL 쿼리 파라미터를 파싱하여 예약 정보를 가져옵니다.
   const { startDate, endDate, nights, roomId, hotelId } = parse(
     window.location.search,
@@ -23,13 +27,13 @@ const Reservation = () => {
   useEffect(() => {
     // 필수 파라미터가 누락된 경우 이전 페이지로 돌아갑니다.
     if (
-      [startDate, endDate, nights, roomId, hotelId].some(
+      [user, startDate, endDate, nights, roomId, hotelId].some(
         param => param === null,
       )
     ) {
       window.history.back();
     }
-  }, [startDate, endDate, nights, roomId, hotelId]);
+  }, [startDate, endDate, nights, roomId, hotelId, user]);
 
   // 예약 정보를 가져오는 커스텀 훅을 사용합니다.
   const { data, isLoading } = useReservation({ hotelId, roomId });
@@ -42,8 +46,18 @@ const Reservation = () => {
   const { hotel, room } = data;
 
   const SubmitData = (data: ReservationFormData) => {
-    console.log(data);
-  };
+    console.log('예약 정보', data);
+    const reservationData = {
+      userId: user?.uid as string,
+      hotelId,
+      roomId,
+      startDate,
+      endDate,
+      nights,
+      ...data,
+    };
+    // 예약 데이터를 서버로 전송하는 로직을 추가하세요.
+    console.log('전송할 예약 데이터', reservationData);
 
   const buttonLabel = `${nights}박 ${Number(room.price * Number(nights)).toLocaleString()}원 결제하기`;
 

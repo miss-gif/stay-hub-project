@@ -1,5 +1,7 @@
 import { getHotelWithRoom } from '@/apis/hotel';
-import { useQuery } from '@tanstack/react-query';
+import makeReservation from '@/apis/reservation';
+import { Reservation } from '@/types/form';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 const useReservation = ({
@@ -20,7 +22,11 @@ const useReservation = ({
     }
   }, [data]);
 
-  return { data, isLoading };
+  const mutation = useMutation({
+    mutationFn: (reservation: Reservation) => makeReservation(reservation),
+  });
+
+  return { data, isLoading, mutation };
 };
 
 export default useReservation;
